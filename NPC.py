@@ -1,4 +1,4 @@
-import Person
+from Person import Person
 import random as rnd
 
 class NPC(Person):

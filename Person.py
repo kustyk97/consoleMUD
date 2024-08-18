@@ -22,14 +22,16 @@ class Person:
     def attack(self) -> float:
         return self.damage
 
-    def get_damage(self, damage: float) -> int:
+    def get_damage(self, damage: float, oponent): 
         damage = damage*(1-self.shield)
         self.hp -=damage
+        print(f"{self.name} get damege and have {self.hp} hp after this")
         if self.hp <= 0:
             self.die()
-            return None
+            return 
         else:
-            return self.attack()
+            oponent.get_damage(self.attack(), self)
+            return 
 
     def die(self):
         self.alive = False
