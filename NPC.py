@@ -7,6 +7,6 @@ class NPC(Person):
         shield = rnd.uniform(0, 0.15)
         super().__init__(name, 100, damage, shield, 1)
 
-    def message(self) -> None:
-        result = f"Hi, my name is {self.name} :D"
+    def message(self, message: str) -> None:
+        result = f"{self.name}: Hi, my name is {self.name} :D"
         print(result)

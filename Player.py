@@ -32,7 +32,7 @@ class Player(Person):
                 print("Z którym NPC chcesz wejść w interakcję?")
                 print("NPC w tej lokacji")
                 npcs = self.location.get_list_of_npc()
-                i = 1
+                i = 0
                 for npc in npcs:
                     print(f"{i}: {npc.name}")
                     i +=1
@@ -40,9 +40,9 @@ class Player(Person):
                 if type(npcId) != int:
                     print("Nie rozponałem numeru")
                 elif value == 2:
-                    self.write_message()
+                    self.write_message(npcs[npcId])
                 else:
-                    self.start_fight(npcs[npcId-1])
+                    self.start_fight(npcs[npcId])
             elif value == 4:
                 continue
             elif value == 5:
@@ -56,8 +56,11 @@ class Player(Person):
     def move(self):
         pass
 
-    def write_message(self) -> None:
+    def write_message(self, npc: NPC) -> None:
+        print("Wpisz treść wiadomości:", end=" ")
         text = input()
+        npc.message(text)
 
     def start_fight(self, opponent: NPC) -> None:
+        print(f"Rozpoczynam walkę z {opponent.name}")
         opponent.get_damage(self.attack(), self)
