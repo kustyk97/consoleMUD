@@ -4,7 +4,7 @@ from Player import Player
 from NPC import NPC
 
 def main():
-    print("Witaj w grze consoleMUD :D")
+    print("Welcome in consoleMUD :D")
 
     map = Map()
     player = Player(map, [0,0])

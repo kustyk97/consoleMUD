@@ -1,34 +1,33 @@
-
 class Person:
-    
-    def __init__(self, name: str, hp: float, damage: float, shield: float, locationId: int) -> None:
+    def __init__(self, name: str, hp: float, damage: float, shield: float) -> None:
         self.alive = True
         self.name = name
         self.hp = hp
         self.damage = damage
         self.shield = shield
-        self.locationId = locationId
-        pass
-    
+
     def print_info(self) -> None:
-        result = f"HP: {self.hp:.2f}\ndamage: {self.damage:.2f}\nshield: {self.shield:.2f}\nlocation: {self.location}"
+        result = (
+            f"HP: {self.hp:.2f}\n"
+            f"Damage: {self.damage:.2f}\n"
+            f"Shield: {self.shield:.2f}\n"
+        )
         print(result)
 
     def attack(self) -> float:
         return self.damage
 
-    def get_damage(self, damage: float, oponent): 
-        damage = damage*(1-self.shield)
-        self.hp -=damage
+    def get_damage(self, damage: float, opponent: 'Person') -> None:
+        effective_damage = damage * (1 - self.shield)
+        self.hp -= effective_damage
 
-        print(f"{oponent.name} attack with damage {damage:.2f} and {self.name} get damege and have {self.hp:.2f} hp after this attack ")
+        print(f"{opponent.name} attacks with damage {effective_damage:.2f} and {self.name} now has {self.hp:.2f} HP after this attack.")
+        
         if self.hp <= 0:
             self.die()
-            return 
         else:
-            oponent.get_damage(self.attack(), self)
-            return 
+            opponent.get_damage(self.attack(), self)
 
-    def die(self):
+    def die(self) -> None:
         self.alive = False
-        print(f"{self.name} die!!!")
+        print(f"{self.name} has died!!!")
