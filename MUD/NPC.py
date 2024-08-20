@@ -1,4 +1,4 @@
-from Person import Person
+from MUD.Person import Person
 import random as rnd
 
 class NPC(Person):

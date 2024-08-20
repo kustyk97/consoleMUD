@@ -1,8 +1,8 @@
-from Person import Person
-from NPC import NPC
+from MUD.Person import Person
+from MUD.NPC import NPC
 import random as rnd
 from MUD.Location import Location
-from Map import Map
+from MUD.Map import Map
 
 class Player(Person):
     def __init__(self, game_map: Map, coords: list) -> None:
@@ -110,3 +110,5 @@ class Player(Person):
     def end_game(self) -> None:
         print("Game ended.")
         print("Bye")
+        exit()
+

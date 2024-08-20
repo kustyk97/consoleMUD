@@ -1,4 +1,4 @@
-from NPC import NPC
+from MUD.NPC import NPC
 
 class Location:
     def __init__(self, npcs: list) -> None:
