@@ -1,7 +1,5 @@
-from Location import Location
-from Map import Map
-from Player import Player
-from NPC import NPC
+from MUD.Map import Map
+from MUD.Player import Player
 
 def main():
     print("Welcome in consoleMUD :D")

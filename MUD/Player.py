@@ -1,7 +1,7 @@
 from Person import Person
 from NPC import NPC
 import random as rnd
-from Location import Location
+from MUD.Location import Location
 from Map import Map
 
 class Player(Person):

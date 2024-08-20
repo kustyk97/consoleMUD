@@ -1,4 +1,4 @@
-from Location import Location
+from MUD.Location import Location
 import numpy as np
 
 class Map:
