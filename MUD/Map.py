@@ -13,7 +13,7 @@ class Map:
     ]
 
     def __init__(self) -> None:
-        self.locations = np.array([[Location(self.NPCs) for _ in range(2)] for _ in range(2)])
+        self.locations = np.array([[Location("Location", self.NPCs) for _ in range(2)] for _ in range(2)])
 
     def get_location(self, coord: list) -> Location:
         try:

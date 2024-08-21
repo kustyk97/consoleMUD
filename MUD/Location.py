@@ -1,9 +1,9 @@
 from MUD.NPC import NPC
 
 class Location:
-    def __init__(self, npcs: list) -> None:
+    def __init__(self, name: str, npcs: list) -> None:
         self.npcs = [NPC(npc["name"]) for npc in npcs]
-        self.name = "Location"
+        self.name = name
         print("Created new Location")
 
     def get_list_of_npcs(self) -> list:
