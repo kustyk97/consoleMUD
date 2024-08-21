@@ -10,4 +10,4 @@ class Location:
         return self.npcs
 
     def __str__(self) -> str:
-        return f"Location contains {len(self.npcs)} NPCs"
+        return f"Location {self.name} contains {len(self.npcs)} NPCs"

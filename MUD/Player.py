@@ -39,6 +39,7 @@ class Player(Person):
     def describe_location(self) -> None:
         # Implementacja opisu lokacji
         print(f"You are in location: {self.location.name}")
+        print(self.location.__str__())
 
     def interact_with_npc(self) -> None:
         self.choose_npc("Which NPC do you want to interact with?", self.location.get_list_of_npcs(), self.write_message)
