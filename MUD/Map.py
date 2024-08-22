@@ -29,7 +29,7 @@ class Map:
     def get_location_name(self, coord: list)-> str:
         try:
             location = self.locations[coord[0], coord[1]]
-            return location.get_name
+            return location.get_name()
         except IndexError:
             print(f"Invalid coordinates: {coord}")
             return None

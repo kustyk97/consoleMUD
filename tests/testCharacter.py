@@ -1,13 +1,13 @@
 import unittest
-from MUD.Character import Person
+from MUD.Character import Character
 from unittest.mock import patch
 
-class TestPerson(unittest.TestCase):
+class TestCharacter(unittest.TestCase):
     
     @patch('builtins.print')
     def setUp(self, mock_print):
-        self.person1 = Person(name="Hero", hp=100.0, damage=20.0, shield=0.1)
-        self.person2 = Person(name="Villain", hp=80.0, damage=15.0, shield=0.2)
+        self.person1 = Character(name="Hero", hp=100.0, damage=20.0, shield=0.1)
+        self.person2 = Character(name="Villain", hp=80.0, damage=15.0, shield=0.2)
 
     def test_initialization(self):
         self.assertEqual(self.person1.name, "Hero")
@@ -32,14 +32,19 @@ class TestPerson(unittest.TestCase):
 
     @patch('builtins.print')
     def test_get_damage(self, mock_print):
-        self.person2.get_damage(30.0, self.person1)  # Villain attacks Hero
+        self.person1.get_damage(30.0)
 
-        self.assertAlmostEqual(self.person2.hp, -8.0) 
-            
+        self.assertAlmostEqual(self.person1.hp, 73.0 ) 
+               
+    @patch('builtins.print')
+    def test_get_damage_and_die(self, mock_print):
+        self.person1.get_damage(3000.0)
+        self.assertFalse(self.person1.alive)
+
     @patch('builtins.print')
     def test_die(self, mock_print):
         #person1 should die after this attack
-        self.person1.get_damage(110.0, self.person2)  # Villain attacks Hero
+        self.person1.die()
         self.assertFalse(self.person1.alive)
 
 if __name__ == '__main__':

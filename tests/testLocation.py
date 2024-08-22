@@ -14,6 +14,7 @@ class TestLocation(unittest.TestCase):
         ]
         self.locaton_name = "TestLocation"
         self.location = Location(self.locaton_name, self.npcs)
+        self.location.npcs[0].shield = 0.0
 
     def test_init(self):
         self.assertEqual(len(self.location.npcs), 3)
@@ -30,6 +31,23 @@ class TestLocation(unittest.TestCase):
     def test_npc_creation(self):
         for npc in self.location.npcs:
             self.assertIsInstance(npc, NPC)
+    def test_get_name(self):
+        self.assertEqual(self.location.get_name(), self.locaton_name)
+
+    @patch('builtins.print')
+    def test_send_message_to_NPC(self, mock_print):
+        self.location.send_message_to_NPC("TestMessage", 0)
+        mock_print.assert_called_once_with(f"NPC1: Hi, my name is NPC1 :D")
+
+    def test_get_NPC(self):
+        npc = self.location.get_NPC(0)
+        self.assertIsInstance(npc, NPC)
+        self.assertEqual(npc.name, "NPC1")
+    
+    @patch('builtins.print')
+    def test_damage_NPC(self, mock_print):
+        self.location.damage_NPC(10, 0)
+        self.assertEqual(self.location.npcs[0].hp, 90)
 
 if __name__ == '__main__':
     unittest.main()

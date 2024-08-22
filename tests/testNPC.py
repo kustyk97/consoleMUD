@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 import random as rnd
 from MUD.NPC import NPC
-from MUD.Character import Person
+from MUD.Character import Character
 
 class TestNPC(unittest.TestCase):
 
@@ -15,7 +15,7 @@ class TestNPC(unittest.TestCase):
         # Check name, hp and instance
         self.assertEqual(self.npc.name, "Goblin")
         self.assertEqual(self.npc.hp, 100)
-        self.assertIsInstance(self.npc, Person)
+        self.assertIsInstance(self.npc, Character)
 
         # Check range of damege and shield
         self.assertGreaterEqual(self.npc.damage, 0)
