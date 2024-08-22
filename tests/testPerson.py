@@ -1,5 +1,5 @@
 import unittest
-from MUD.Person import Person
+from MUD.Character import Person
 from unittest.mock import patch
 
 class TestPerson(unittest.TestCase):

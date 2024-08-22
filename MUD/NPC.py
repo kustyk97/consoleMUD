@@ -1,7 +1,7 @@
-from MUD.Person import Person
+from MUD.Character import Character
 import random as rnd
 
-class NPC(Person):
+class NPC(Character):
     def __init__(self, name: str) -> None:
         damage = rnd.uniform(0, 100)
         shield = rnd.uniform(0, 0.15)

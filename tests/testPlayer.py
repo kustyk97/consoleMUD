@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from MUD.Person import Person
+from MUD.Character import Person
 from MUD.NPC import NPC
 from MUD.Location import Location
 from MUD.Map import Map

@@ -1,4 +1,4 @@
-class Person:
+class Character:
     def __init__(self, name: str, hp: float, damage: float, shield: float) -> None:
         self.alive = True
         self.name = name
@@ -17,16 +17,14 @@ class Person:
     def attack(self) -> float:
         return self.damage
 
-    def get_damage(self, damage: float, opponent: 'Person') -> None:
+    def get_damage(self, damage: float) -> None:
         effective_damage = damage * (1 - self.shield)
         self.hp -= effective_damage
 
-        print(f"{opponent.name} attacks with damage {effective_damage:.2f} and {self.name} now has {self.hp:.2f} HP after this attack.")
+        print(f"Oponent attacks with damage {effective_damage:.2f} and {self.name} now has {self.hp:.2f} HP after this attack.")
         
         if self.hp <= 0:
             self.die()
-        else:
-            opponent.get_damage(self.attack(), self)
 
     def die(self) -> None:
         self.alive = False

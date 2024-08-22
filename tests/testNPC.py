@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 import random as rnd
 from MUD.NPC import NPC
-from MUD.Person import Person
+from MUD.Character import Person
 
 class TestNPC(unittest.TestCase):
 
