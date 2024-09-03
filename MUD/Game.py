@@ -2,7 +2,7 @@ from MUD.Map import Map
 from MUD.Player import Player
 from MUD.Location import Location
 from MUD.NPC import NPC
-
+from utils.utils import try_get_int_value
 class Game:
 
     def __init__(self) -> None:
@@ -25,11 +25,13 @@ class Game:
             for key, action in actions.items():
                 print(f"{key}. {action.__name__.replace('_', ' ').title()}")
             print("Insert number of chosen action:", end=" ")
-            value = int(input())
-
-            action = actions.get(value)
-            if action:
-                action()
+            value = try_get_int_value()
+            if value is not None:
+                action = actions.get(value)
+                if action:
+                    action()
+                else:
+                    print("Unknow value, insert again")
             else:
                 print("Unknow value, insert again")
 
@@ -47,9 +49,9 @@ class Game:
         self.choose_npc("Which NPC do you want to fight?", self.player.coords, self.start_fight)
 
     def write_message(self, NPC_coords: list, npc_ID: int) -> None:
-        print("Insert message:", end=" ")
-        message_text = input()
+        message_text = self.player.write_message()
         self.map.send_message_to_NPC(message_text, NPC_coords, npc_ID)
+        
     def start_fight(self, NPC_coords: list, opponent_ID: int) -> None:
         print(f"Start fight with {self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).name}")
 
@@ -67,10 +69,14 @@ class Game:
         for i, npc in enumerate(npcs):
             print(f"{i}: {npc.name}")
         print("Insert value:", end=" ")
-        npc_id = int(input())
+        npc_id = try_get_int_value()
 
-        if 0 <= npc_id < len(npcs):
-            action(coords, npc_id)
+        if npc_id is not None:
+            if 0 <= npc_id < len(npcs):
+                action(coords, npc_id)
+            else:
+                print("Unknow number")
+                print("Return to main menu")
         else:
             print("Unknow number")
             print("Return to main menu")
@@ -90,11 +96,14 @@ class Game:
         for key, direction in directions.items():
             print(f"{key}. {direction.__name__.replace('_', ' ').title()}")
         print("Insert value of destination directin:", end=" ")
-        value = int(input())
+        value = try_get_int_value()
 
-        move_action = directions.get(value)
-        if move_action and move_action():
-            print("Successfully moved")
+        if value is not None:
+            move_action = directions.get(value)
+            if move_action and move_action():
+                print("Successfully moved")
+            else:               
+                print("Failed to move")
         else:
             print("Failed to move")
 
