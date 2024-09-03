@@ -16,7 +16,7 @@ class TestGame(unittest.TestCase):
         self.assertIsNotNone(self.game.map)
         self.assertIsNotNone(self.game.player)
         self.assertEqual(self.game.player.coords, [0,0])
-        
+
     @patch('builtins.print')
     def test_describe_location(self, mock_print):
         self.game.player.coords = [0,0]
@@ -148,8 +148,8 @@ class TestGame(unittest.TestCase):
         cases = [[0,0], [1,1]]
         for case in cases:
             self.assertTrue(self.game.move_to(case))
-
-    def test_move_to_invalid(self):
+    @patch('builtins.print')
+    def test_move_to_invalid(self, mock_print):
         cases = [[-1, 0 ], [10, 10]]
         for case in cases:
             self.assertFalse(self.game.move_to(case))
