@@ -10,5 +10,5 @@ python main.py
 ## Running tests (unittest)
 
 ```bash
-python -m unittest discover tests 
+python -m unittest 
 ```
