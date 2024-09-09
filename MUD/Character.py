@@ -21,8 +21,10 @@ class Character:
         effective_damage = damage * (1 - self.shield)
         self.hp -= effective_damage
 
-        print(f"Oponent attacks with damage {effective_damage:.2f} and {self.name} now has {self.hp:.2f} HP after this attack.")
-        
+        print(
+            f"Oponent attacks with damage {effective_damage:.2f} and {self.name} now has {self.hp:.2f} HP after this attack."
+        )
+
         if self.hp <= 0:
             self.die()
 

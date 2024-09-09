@@ -3,21 +3,23 @@ from MUD.Player import Player
 from MUD.Location import Location
 from MUD.NPC import NPC
 from utils.utils import try_get_int_value
+
+
 class Game:
 
     def __init__(self) -> None:
         self.map = Map()
-        self.player = Player(start_coords=[0,0])
+        self.player = Player(start_coords=[0, 0])
         pass
 
-    def start(self) ->None:
+    def start(self) -> None:
 
         actions = {
             1: self.describe_location,
             2: self.interact_with_npc,
             3: self.fight_npc,
             4: self.move,
-            5: self.end_game
+            5: self.end_game,
         }
 
         while True:
@@ -43,25 +45,41 @@ class Game:
         print(location.__str__())
 
     def interact_with_npc(self) -> None:
-        self.choose_npc("Which NPC do you want to interact with?", self.player.coords , self.write_message)
+        self.choose_npc(
+            "Which NPC do you want to interact with?",
+            self.player.coords,
+            self.write_message,
+        )
 
     def fight_npc(self) -> None:
-        self.choose_npc("Which NPC do you want to fight?", self.player.coords, self.start_fight)
+        self.choose_npc(
+            "Which NPC do you want to fight?", self.player.coords, self.start_fight
+        )
 
     def write_message(self, NPC_coords: list, npc_ID: int) -> None:
         message_text = self.player.write_message()
         self.map.send_message_to_NPC(message_text, NPC_coords, npc_ID)
-        
-    def start_fight(self, NPC_coords: list, opponent_ID: int) -> None:
-        print(f"Start fight with {self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).name}")
 
-        while self.player.alive is True and self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).alive is True:
+    def start_fight(self, NPC_coords: list, opponent_ID: int) -> None:
+        print(
+            f"Start fight with {self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).name}"
+        )
+
+        while (
+            self.player.alive is True
+            and self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).alive
+            is True
+        ):
             print(f"{self.player.name} attack")
             self.map.damage_NPC(self.player.attack(), NPC_coords, opponent_ID)
-            if self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).alive is True:
+            if (
+                self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).alive
+                is True
+            ):
                 print(f"Oponent attack")
-                self.player.get_damage(self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).attack())
-
+                self.player.get_damage(
+                    self.map.get_NPC(NPC_coords=NPC_coords, npc_ID=opponent_ID).attack()
+                )
 
     def choose_npc(self, prompt: str, coords: list, action) -> None:
         print(prompt)
@@ -89,7 +107,7 @@ class Game:
             1: self.move_north,
             2: self.move_south,
             3: self.move_west,
-            4: self.move_east
+            4: self.move_east,
         }
 
         print("Choose direction:")
@@ -102,7 +120,7 @@ class Game:
             move_action = directions.get(value)
             if move_action and move_action():
                 print("Successfully moved")
-            else:               
+            else:
                 print("Failed to move")
         else:
             print("Failed to move")
@@ -129,4 +147,3 @@ class Game:
         print("Game ended.")
         print("Bye")
         exit()
-

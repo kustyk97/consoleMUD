@@ -4,12 +4,13 @@ from MUD.Character import Character
 from MUD.NPC import NPC
 from MUD.Location import Location
 from MUD.Map import Map
-from MUD.Player import Player  
+from MUD.Player import Player
 import numpy as np
+
 
 class TestPlayer(unittest.TestCase):
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def setUp(self, mock_print):
         self.player = Player(start_coords=[0, 0])
 
@@ -27,9 +28,10 @@ class TestPlayer(unittest.TestCase):
     def test_write_message(self):
         input_values = ["test", "HelloThere"]
         for input_value in input_values:
-            with patch('builtins.input', return_value=input_value):
+            with patch("builtins.input", return_value=input_value):
                 result = self.player.write_message()
                 self.assertEqual(result, input_value)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
